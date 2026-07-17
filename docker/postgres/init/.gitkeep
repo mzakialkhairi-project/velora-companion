@@ -1,0 +1,2 @@
+# PostgreSQL init scripts
+# Scripts in this directory are executed when the container is first created
