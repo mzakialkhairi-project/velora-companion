@@ -33,6 +33,17 @@ type Config struct {
 	RedisPort     int    `env:"REDIS_PORT"`
 	RedisPassword string `env:"REDIS_PASSWORD"`
 	RedisDB       int    `env:"REDIS_DB"`
+
+	// JWT
+	JWTSecret              string `env:"JWT_SECRET"`
+	JWTIssuer              string `env:"JWT_ISSUER"`
+	JWTAccessTokenExpires  string `env:"JWT_ACCESS_TOKEN_EXPIRES"`
+	JWTRefreshTokenExpires string `env:"JWT_REFRESH_TOKEN_EXPIRES"`
+
+	// Ollama
+	OllamaURL     string `env:"OLLAMA_URL"`
+	OllamaModel   string `env:"OLLAMA_MODEL"`
+	OllamaTimeout int    `env:"OLLAMA_TIMEOUT"`
 }
 
 // LoadConfig loads configuration from environment variables

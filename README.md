@@ -2,16 +2,16 @@
 
 # Velora
 
-### AI Companion Platform for Roleplay, Storytelling, and Intelligent Conversations
+### AI Platform for Intelligent Conversations, Roleplay, and AI Companions
 
-*A modern AI-native platform designed for immersive conversations, character interaction, and long-term memory.*
+*An AI-native platform built with Clean Architecture, designed for contextual conversations, AI companions, storytelling, and future multi-provider AI integration.*
 
 ---
 
-![Status](https://img.shields.io/badge/status-in%20development-orange)
-![Go](https://img.shields.io/badge/backend-Go-00ADD8)
-![Flutter](https://img.shields.io/badge/mobile-Flutter-02569B)
-![PostgreSQL](https://img.shields.io/badge/database-PostgreSQL-4169E1)
+![Status](https://img.shields.io/badge/status-alpha-orange)
+![Backend](https://img.shields.io/badge/backend-Go-00ADD8)
+![Mobile](https://img.shields.io/badge/mobile-Flutter-02569B)
+![Database](https://img.shields.io/badge/database-PostgreSQL-4169E1)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 </div>
@@ -20,40 +20,59 @@
 
 # Overview
 
-Velora is an AI-native mobile platform focused on creating meaningful and immersive conversations.
+Velora is an AI-native platform focused on building intelligent conversational experiences.
 
-Rather than being another chatbot, Velora is designed as a foundation for building intelligent AI companions capable of roleplay, storytelling, contextual conversations, and long-term memory.
+Unlike traditional chatbot applications, Velora is designed as a modular AI platform that supports contextual conversations, AI companions, roleplay, storytelling, and future integrations such as long-term memory, knowledge retrieval, tool calling, and multiple AI providers.
 
-The project prioritizes clean architecture, maintainability, and AI-assisted software development.
+The project follows Clean Architecture and Domain-Driven principles to ensure long-term maintainability, extensibility, and AI-friendly development.
 
 ---
 
 # Vision
 
-Create an AI platform that feels natural, personal, and enjoyable to interact with while remaining simple to develop and maintain.
+Build an extensible AI platform where conversations become contextual, persistent, and deeply personalized while keeping the architecture simple, maintainable, and scalable.
 
 ---
 
-# Goals
+# Current Features
 
-- AI Companion Experience
-- Character-based Conversations
-- Roleplay & Storytelling
-- Long-term Memory
-- Local AI Support
-- Cloud AI Integration
-- Modern Mobile Experience
+## Platform
+
+- Workspace Management
+- Conversation Management
+- Message Persistence
+- Conversation Settings
+- Conversation Summary Foundation
+
+## Authentication
+
+- JWT Authentication
+- Refresh Token
+- Logout
+- Protected Routes
+
+## AI Runtime
+
+- Provider Abstraction
+- AI Engine
+- Prompt Builder
+- Context Management Foundation
+- Streaming Engine
+- Chat Observability
+- Ollama Provider
 
 ---
 
-# Core Principles
+# Architecture Highlights
 
-- Simplicity First
 - Clean Architecture
-- AI-Friendly Development
 - Modular Monolith
-- Readable Code
-- Maintainable Code
+- Provider Abstraction
+- Context Builder
+- Conversation Summary
+- Streaming Foundation
+- AI-first Design
+- Future Multi-provider Ready
 
 ---
 
@@ -72,7 +91,6 @@ Create an AI platform that feels natural, personal, and enjoyable to interact wi
 ## Database
 
 - PostgreSQL
-- pgvector
 
 ## Cache
 
@@ -95,7 +113,7 @@ Create an AI platform that feels natural, personal, and enjoyable to interact wi
 
 # Repository Structure
 
-```
+```text
 velora/
 
 .ai/
@@ -115,48 +133,66 @@ docker-compose.yml
 
 Velora is developed together with AI coding assistants.
 
-Project knowledge and engineering guidelines are stored inside:
+All architectural decisions, engineering guidelines, coding conventions, and project context are maintained inside:
 
-```
+```text
 .ai/
 ```
 
-This directory acts as the project's knowledge base and helps AI assistants understand the architecture, coding conventions, and development goals before generating code.
+Every implementation begins by reading the project knowledge base before generating code.
+
+---
+
+# Backend Progress
+
+## Completed
+
+- Bootstrap
+- Docker Environment
+- Configuration System
+- Database Foundation
+- Authentication
+- Workspace Module
+- Conversation Module
+- Message Module
+- AI Provider Abstraction
+- Ollama Provider
+- Chat API
+- Streaming Engine
+- Prompt Builder
+- Context Management Foundation
+- Conversation Summary Foundation
 
 ---
 
 # Current Roadmap
 
-- [x] Project Planning
-- [x] AI Context
-- [ ] Repository Bootstrap
-- [ ] Docker Environment
-- [ ] Backend Foundation
-- [ ] Flutter Foundation
-- [ ] Authentication
-- [ ] Character System
-- [ ] Conversation System
-- [ ] Memory System
-- [ ] AI Integration
-- [ ] MVP Release
+- [x] AI Runtime Foundation
+- [x] Context Management Foundation
+- [ ] Context Provider Pattern
+- [ ] Scheduler Abstraction
+- [ ] Tool Calling Foundation
+- [ ] Multi-Provider Support
+- [ ] Knowledge Retrieval
+- [ ] Long-term Memory
+- [ ] Flutter Client
+- [ ] Public Alpha
 
 ---
 
-# Development Status
+# Project Status
 
-Current Phase
+> **Current Phase:** AI Runtime Stabilization & Architecture Refinement
 
-> Repository Bootstrap
-
-The project is currently establishing its development foundation before implementation begins.
+The core backend foundation is complete. Current development focuses on strengthening the AI runtime architecture before expanding into advanced AI capabilities.
 
 ---
 
 # Documentation
 
-Project documentation can be found inside:
+Project documentation lives inside:
 
-```
+```text
 .ai/
 docs/
 ```
@@ -165,9 +201,11 @@ docs/
 
 # Contributing
 
-This project is currently developed as a personal portfolio project.
+Velora is currently developed as a personal portfolio project.
 
-External contributions may be accepted in the future.
+The architecture intentionally prioritizes readability, maintainability, and long-term extensibility.
+
+Community contributions may be welcomed in the future.
 
 ---
 

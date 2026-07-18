@@ -1,102 +1,66 @@
-# TASK
+# Current Task - Scheduler Abstraction
 
-Version: 1.0
+## Status: ✅ COMPLETED
 
----
+## Objective
+Refactor goroutine usage to Scheduler abstraction.
 
-# Current Milestone
+## Rules
+- Jangan ubah Chat API
+- Jangan ubah AI Engine
+- Jangan ubah Prompt Builder
+- Jangan ubah Streaming
+- Jangan buat Queue
+- Jangan buat Redis Worker
 
-Authentication Foundation
+## Scheduler Interface
+**File:** `shared/scheduler/scheduler.go`
+```go
+type Scheduler interface {
+    Schedule(ctx context.Context, job Job) error
+}
+```
 
----
+## Job Interface
+**File:** `shared/scheduler/job.go`
+```go
+type Job interface {
+    Name() string
+    Run(ctx context.Context) error
+}
+```
 
-# Objective
+## Immediate Scheduler
+**File:** `shared/scheduler/immediate_scheduler.go`
+- Default implementation using goroutine
+- ChatService tidak tahu goroutine digunakan
 
-Membangun pondasi Authentication.
+## Summary Job
+**File:** `ai/summary/summary_job.go`
+- SummaryJob implements Job interface
+- Calls SummaryService.Summarize()
 
-Belum ada Login.
+## Integration
+**File:** `ai/engine/chat_service.go`
+- Added scheduler field
+- Changed direct goroutine call to scheduler.Schedule()
 
-Belum ada Register.
+**File:** `bootstrap/router.go`
+- Creates ImmediateScheduler
+- Passes to NewChatService
 
-Belum ada JWT Middleware.
+## Future Compatibility
+Architecture supports future implementations:
+- WorkerScheduler
+- RedisScheduler
+- RabbitMQScheduler
+- KafkaScheduler
+- CloudTaskScheduler
 
-Belum ada endpoint.
+## Validation
+- ✅ go fmt ./...
+- ✅ go vet ./...
+- ✅ go build ./...
 
-Belum ada repository implementation.
-
-Belum ada business logic.
-
----
-
-# Requirements
-
-1. Buat module `internal/modules/auth/` dengan struktur:
-   - service/
-   - repository/
-   - handler/
-   - routes/
-   - dto/
-   - mapper/
-   - validator/
-   - docs/
-
-2. Repository interface:
-   - FindUserByEmail
-   - SaveRefreshToken
-   - GetRefreshToken
-   - DeleteRefreshToken
-
-3. Service interface:
-   - Register
-   - Login
-   - Logout
-   - RefreshToken
-   - ValidateToken
-
-4. DTO (skeleton):
-   - LoginRequest
-   - RegisterRequest
-   - RefreshTokenRequest
-   - LoginResponse
-   - RefreshTokenResponse
-
-5. Handler (skeleton)
-
-6. Routes (skeleton, belum register)
-
----
-
-# Out of Scope
-
-Jangan membuat:
-
-- Business Logic
-- Repository Implementation
-- GORM
-- SQL
-- Migration
-- Seeder
-- JWT Library
-- Middleware
-- Route Registration
-- Login/Register/Refresh Endpoint
-
----
-
-# Validation
-
-- go mod tidy
-- go fmt ./...
-- go vet ./...
-- go build ./...
-
----
-
-# Completion Report
-
-1. File dibuat
-2. Struktur module
-3. Contracts
-4. DTO
-5. Hasil build
-6. Blocker (jika ada)
+## Blocker
+❌ Tidak ada

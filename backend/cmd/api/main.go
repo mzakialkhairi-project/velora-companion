@@ -12,6 +12,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/mzakiaklhairi/velora/internal/bootstrap"
+	"github.com/mzakiaklhairi/velora/internal/infrastructure/jwt"
+	authrepo "github.com/mzakiaklhairi/velora/internal/modules/auth/repository"
+	userrepo "github.com/mzakiaklhairi/velora/internal/modules/user/repository"
 	"github.com/mzakiaklhairi/velora/internal/shared"
 )
 
@@ -39,11 +42,38 @@ func main() {
 	}
 	defer registry.Close()
 
+	// Create user repository
+	userRepo := userrepo.NewPostgresUserRepository(registry.Database.DB)
+
+	// Create refresh token repository
+	refreshTokenRepo := authrepo.NewPostgresRefreshTokenRepository(registry.Database.DB)
+
+	// Initialize JWT service
+	jwtService, err := jwt.NewJWTService(jwt.Config{
+		Secret:        cfg.JWTSecret,
+		Issuer:        cfg.JWTIssuer,
+		AccessExpires: cfg.JWTAccessTokenExpires,
+	})
+	if err != nil {
+		shared.Fatal("Failed to create JWT service", "error", err.Error())
+	}
+
+	// Parse refresh token expiry
+	refreshExpires, err := time.ParseDuration(cfg.JWTRefreshTokenExpires)
+	if err != nil {
+		shared.Fatal("Failed to parse refresh token expiry", "error", err.Error())
+	}
+
 	// Register health endpoints
 	registry.Router.RegisterRoutes(
 		readyHandler(registry),
 		healthHandler,
 		rootHandler(cfg),
+		userRepo,
+		jwtService,
+		refreshTokenRepo,
+		registry.Database.DB,
+		refreshExpires,
 	)
 
 	// Create HTTP server

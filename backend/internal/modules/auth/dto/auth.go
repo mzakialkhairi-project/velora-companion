@@ -1,15 +1,24 @@
 // Package dto provides authentication data transfer objects.
 package dto
 
-// RegisterRequest represents the request to register a new user
-type RegisterRequest struct {
-	Name     string `json:"name"`
+// LoginRequest represents the request to login
+type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-// LoginRequest represents the request to login
-type LoginRequest struct {
+// LoginResponse represents the login response with JWT token
+type LoginResponse struct {
+	AccessToken  string        `json:"access_token"`
+	RefreshToken string        `json:"refresh_token"`
+	TokenType    string        `json:"token_type"`
+	ExpiresIn    int64         `json:"expires_in"`
+	User         *UserResponse `json:"user"`
+}
+
+// RegisterRequest represents the request to register a new user
+type RegisterRequest struct {
+	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
@@ -33,8 +42,8 @@ type UserResponse struct {
 	Name      string `json:"name"`
 	Email     string `json:"email"`
 	Status    string `json:"status"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	CreatedAt string `json:"created_at,omitempty"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 }
 
 // LogoutResponse represents the logout response

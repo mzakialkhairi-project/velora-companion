@@ -8,13 +8,11 @@ import (
 
 // RegisterRoutes registers the auth routes
 func RegisterRoutes(router *gin.RouterGroup, authHandler *handler.AuthHandler) {
-	// Auth routes will be registered here when ready
-	// Example:
-	// auth := router.Group("/auth")
-	// {
-	//     auth.POST("/register", authHandler.Register)
-	//     auth.POST("/login", authHandler.Login)
-	//     auth.POST("/logout", authHandler.Logout)
-	//     auth.POST("/refresh", authHandler.RefreshToken)
-	// }
+	auth := router.Group("/auth")
+	{
+		auth.POST("/register", authHandler.Register)
+		auth.POST("/login", authHandler.Login)
+		auth.POST("/logout", authHandler.Logout)
+		auth.POST("/refresh", authHandler.RefreshToken)
+	}
 }

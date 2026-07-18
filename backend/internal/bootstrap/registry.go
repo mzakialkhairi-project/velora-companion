@@ -2,6 +2,8 @@
 package bootstrap
 
 import (
+	"github.com/mzakiaklhairi/velora/internal/ai/provider"
+	"github.com/mzakiaklhairi/velora/internal/ai/provider/ollama"
 	"github.com/mzakiaklhairi/velora/internal/shared"
 )
 
@@ -35,6 +37,11 @@ func (r *Registry) Build(cfg *shared.Config) error {
 		return err
 	}
 	r.Redis = redisClient
+
+	// Initialize Ollama provider and register
+	ollamaCfg := ollama.NewConfig(cfg)
+	ollamaProvider := ollama.NewOllamaProvider(ollamaCfg)
+	provider.Register("ollama", ollamaProvider)
 
 	// Initialize router
 	router := InitRouter(cfg.AppDebug)

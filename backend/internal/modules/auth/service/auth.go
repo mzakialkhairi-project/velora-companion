@@ -12,8 +12,8 @@ type AuthService interface {
 	// Register registers a new user
 	Register(ctx context.Context, req *dto.RegisterRequest) (*dto.AuthResponse, error)
 
-	// Login authenticates a user and returns tokens
-	Login(ctx context.Context, req *dto.LoginRequest) (*dto.AuthResponse, error)
+	// Login authenticates a user and returns login response with JWT
+	Login(ctx context.Context, req *dto.LoginRequest) (*dto.LoginResponse, error)
 
 	// Logout invalidates the user's refresh token
 	Logout(ctx context.Context, refreshToken string) error
